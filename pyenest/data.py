@@ -1,34 +1,34 @@
 from eusful.data import EasyObject, Atom, Sequence, Dictionary
 
 class Device(EasyObject):
-  id = Atom
-  name = Atom
-  scale = Atom
-  temperature = Atom
-  target_temperature_low = Atom
-  target_temperature_high = Atom
-  system_mode = Atom
-  heater_on = Atom
-  ac_on = Atom
-  fan_mode = Atom
-  fan_on = Atom
+    id = Atom
+    name = Atom
+    scale = Atom
+    temperature = Atom
+    target_temperature_low = Atom
+    target_temperature_high = Atom
+    system_mode = Atom
+    heater_on = Atom
+    ac_on = Atom
+    fan_mode = Atom
+    fan_on = Atom
 
 class Structure(EasyObject):
-  id = Atom
-  name = Atom
-  location = Atom
-  away = Atom
-  num_thermostats = Atom
-  devices = Dictionary
+    id = Atom
+    name = Atom
+    location = Atom
+    away = Atom
+    num_thermostats = Atom
+    devices = Dictionary
 
 class Account(EasyObject):
-  id = Atom
-  name = Atom
-  structures = Dictionary
+    id = Atom
+    name = Atom
+    structures = Dictionary
 
 def clean_id(prepended_str):
-  period = prepended_str.find('.')
-  return prepended_str[period+1:]
+    period = prepended_str.find('.')
+    return prepended_str[period+1:]
 
 
 #top level keys:
