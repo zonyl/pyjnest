@@ -2,10 +2,10 @@
 
 from setuptools import setup, find_packages
 readme = open('README.txt').read()
-setup(name='pyenest',
-      version='0.5',
+setup(name='pyjnest',
+      version='0.6',
       description='Python API for Nest Thermostat - Edited',
-      author='Eugene Efremov',
-      author_email='eaefremov@gmail.com',
-      url='http://www.github.com/eae',
+      author='Jeffrey C. Ollie',
+      author_email='jeff@ocjtech.us',
+      url='http://www.github.com/jcollie',
       packages=find_packages())

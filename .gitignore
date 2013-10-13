@@ -1,10 +1,12 @@
-
+*~
+*.pyo
 *.pyc
 *.csproj*
 *.sln
 *.suo
-Properties
-obj
-bin
-dist
+/Properties
+/obj
+/bin
+/dist
+/test.py
 *.egg-info*
