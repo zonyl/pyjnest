@@ -129,6 +129,7 @@ class Device(object):
         self.connection = connection
         self.device_id = device_id
         self.connection._devices[self.device_id] = self
+        self._fan_mode = None
 
     def __getattr__(self, name):
         if name.startswith('_'):
@@ -153,10 +154,14 @@ class Device(object):
     def data(self):
         return self.connection.status['device'][self.device_id]
 
-    def toggle_fan(self):
-        was_on = self.fan_mode == 'on'
+    @property
+    def fan_mode(self):
+        return self._fan_mode
 
-        data = {'fan_mode': ('auto' if was_on else 'on')}
+    @fan_mode.setter
+    def fan_mode(self, mode):
+        self._fan_mode = mode
+        data = {'fan_mode': (self.fan_mode)}
 
         headers = self.connection.headers.copy()
         headers['Content-Type'] = 'application/json'
@@ -167,6 +172,11 @@ class Device(object):
 
         print r.status_code
         print r.text
+
+
+    def toggle_fan(self):
+        mode == 'on' if self.fan_mode == 'auto' else 'auto'
+        self.fan_mode = mode
 
     def change_temperature(self, delta = 0, target_type = 'target_temperature'):
         old_target = getattr(self, target_type)
@@ -215,10 +225,14 @@ class Structure(object):
     def devices(self):
         return {device.device_id: device for device, structure in self.connection.links if self == structure}
 
-    def toggle_away(self, structure_id):
-        was_away = self.simple_status.structures[structure_id].away
-
-        data = {'away': not was_away}
+    @property
+    def away(self):
+        return self.simple_status.structures[structure_id].away
+    
+    @away.setter
+    def away(self, is_away):
+        self._is_away = is_away
+        data = {'away': is_away}
 
         headers = self.headers.copy()
         headers['Content-Type'] = 'application/json'
@@ -229,3 +243,8 @@ class Structure(object):
         
         print r.status_code
         print r.text
+        
+
+    def toggle_away(self, structure_id):
+        is_away = self.simple_status.structures[structure_id].away
+        self.away = not is_away
